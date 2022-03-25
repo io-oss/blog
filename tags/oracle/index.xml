@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Oracle on 海拉鲁大魔王</title>
+        <link>https://io-oss.gitee.io/blog/tags/oracle/</link>
+        <description>Recent content in Oracle on 海拉鲁大魔王</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <lastBuildDate>Fri, 25 Dec 2020 14:38:32 +0800</lastBuildDate><atom:link href="https://io-oss.gitee.io/blog/tags/oracle/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Oracle定时备份</title>
+        <link>https://io-oss.gitee.io/blog/p/22637e0b/</link>
+        <pubDate>Fri, 25 Dec 2020 14:38:32 +0800</pubDate>
+        
+        <guid>https://io-oss.gitee.io/blog/p/22637e0b/</guid>
+        <description>&lt;blockquote&gt;
+&lt;p&gt;转载自：&lt;a href=&#34;https://segmentfault.com/a/1190000008596697&#34; target=&#34;_blank&#34;&gt;Windows下Oracle定时备份(全量备份)&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;关于Windows下oracle全量备份的文章，很多网站都有，写下本文不过是为了以后方便查找，不用再到处找。以下些许内容有所参考到其他人所写内容，这里无意冒犯，本文引用内容部分会附上参考地址，还望原作者见谅。&lt;/p&gt;
+&lt;h2 id=&#34;备份脚本&#34;&gt;备份脚本&lt;/h2&gt;
+&lt;p&gt;新建txt文档，把脚本复制进去后改文件格式为bat文件，双击运行即可测试该脚本是否有误。这里要说明一下，开始把脚本拿过来执行时，一直未能成功备份数据库,用bat的pause暂停调试发现了一些问题，有时不注意可能会在定义,变量如BACKUPDATE、USER等后面带了空格,这个时候问题就来了，导致参数的不正确，所以这里需注意！&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;@echo off   
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;================================================&lt;/span&gt;   
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt;  Windows环境下Oracle数据库的自动备份脚本  
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt;  1. 使用当前日期命名备份文件。  
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt;  2. 自动删除7天前的备份。  
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;================================================&lt;/span&gt;  
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt;  以“YYYYMMDD”格式取出当前时间。  
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;set&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;BACKUPDATE&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;%date:~0,4%%date:~5,2%%date:~8,2%%time:~0,2%%time:~3,2%%time:~6,2%
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt;  设置用户名、密码和要备份的数据库
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;set&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;USER&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;ora_user
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;set&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;PASSWORD&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;ora_name
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;set&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;DATABASE&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;conn_db
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt;  创建备份目录
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; not exist &lt;span class=&#34;s2&#34;&gt;&amp;#34;E:\backup\data&amp;#34;&lt;/span&gt;       mkdir E:&lt;span class=&#34;se&#34;&gt;\b&lt;/span&gt;ackup&lt;span class=&#34;se&#34;&gt;\d&lt;/span&gt;ata  
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; not exist &lt;span class=&#34;s2&#34;&gt;&amp;#34;E:\backup\log&amp;#34;&lt;/span&gt;        mkdir E:&lt;span class=&#34;se&#34;&gt;\b&lt;/span&gt;ackup&lt;span class=&#34;se&#34;&gt;\l&lt;/span&gt;og  
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;set&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;DATADIR&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;E:&lt;span class=&#34;se&#34;&gt;\b&lt;/span&gt;ackup&lt;span class=&#34;se&#34;&gt;\d&lt;/span&gt;ata
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;set&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;LOGDIR&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;E:&lt;span class=&#34;se&#34;&gt;\b&lt;/span&gt;ackup&lt;span class=&#34;se&#34;&gt;\l&lt;/span&gt;og
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;exp %USER%/%PASSWORD%@%DATABASE% &lt;span class=&#34;nv&#34;&gt;file&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;%DATADIR%&lt;span class=&#34;se&#34;&gt;\d&lt;/span&gt;ata_%BACKUPDATE%.dmp &lt;span class=&#34;nv&#34;&gt;log&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;%LOGDIR%&lt;span class=&#34;se&#34;&gt;\l&lt;/span&gt;og_%BACKUPDATE%.log
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt;  删除7天前的备份。
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;forfiles /p &lt;span class=&#34;s2&#34;&gt;&amp;#34;%DATADIR%&amp;#34;&lt;/span&gt; /s /m *.* /d -7 /c &lt;span class=&#34;s2&#34;&gt;&amp;#34;cmd /c del @path&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;forfiles /p &lt;span class=&#34;s2&#34;&gt;&amp;#34;%LOGDIR%&amp;#34;&lt;/span&gt; /s /m *.* /d -7 /c &lt;span class=&#34;s2&#34;&gt;&amp;#34;cmd /c del @path&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;exit&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;blockquote&gt;
+&lt;p&gt;注：该脚本参考&lt;a href=&#34;http://blog.csdn.net/iw1210/article/details/39312783&#34; target=&#34;_blank&#34;&gt;Windows环境下Oracle数据库的自动备份脚本&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;定时任务&#34;&gt;定时任务&lt;/h2&gt;
+&lt;p&gt;这里需要用到Windows的【任务计划程序】，操作按照下列截图一一操作。&lt;/p&gt;
+&lt;h3 id=&#34;快捷查询&#34;&gt;快捷查询&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/io-oss/NetDisk/img/20210206144645.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;选择任务计划程序&#34;&gt;选择任务计划程序&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/io-oss/NetDisk/img/20210206144756.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;创建基本任务&#34;&gt;创建基本任务&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/io-oss/NetDisk/img/20210206144841.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;填写任务相关信息&#34;&gt;填写任务相关信息&lt;/h3&gt;
+&lt;h4 id=&#34;定时任务描述&#34;&gt;定时任务描述&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/io-oss/NetDisk/img/20210206144907.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h4 id=&#34;任务执行时间&#34;&gt;任务执行时间&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/io-oss/NetDisk/img/20210206144933.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/io-oss/NetDisk/img/20210206144953.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/io-oss/NetDisk/img/20210206145017.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;选择刚刚写的数据库备份脚本&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/io-oss/NetDisk/img/20210206145042.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;最后在任务列表里可以看到刚刚创建的定时任务，那么这个任务从设定的时间开始则会每天执行一次，即达到定时备份任务了&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/io-oss/NetDisk/img/20210206145102.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;注：以上内容参考 &lt;a href=&#34;http://jingyan.baidu.com/article/08b6a591c30ae914a8092205.html&#34; target=&#34;_blank&#34;&gt;定时备份ORACLE数据库(windows环境下)&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;脚本&#34;&gt;脚本&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://cdn.jsdelivr.net/gh/io-oss/NetDisk/annex/定时备份.txt&#34; target=&#34;_blank&#34;&gt;定时备份.txt&lt;/a&gt;&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

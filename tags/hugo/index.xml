@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Hugo on 海拉鲁大魔王</title>
+        <link>https://io-oss.gitee.io/blog/tags/hugo/</link>
+        <description>Recent content in Hugo on 海拉鲁大魔王</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <lastBuildDate>Wed, 24 Feb 2021 00:53:53 +0800</lastBuildDate><atom:link href="https://io-oss.gitee.io/blog/tags/hugo/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Hugo永久链接</title>
+        <link>https://io-oss.gitee.io/blog/p/da23b91d/</link>
+        <pubDate>Wed, 24 Feb 2021 00:53:53 +0800</pubDate>
+        
+        <guid>https://io-oss.gitee.io/blog/p/da23b91d/</guid>
+        <description>&lt;blockquote&gt;
+&lt;p&gt;使用 &lt;code&gt;hugo new&lt;/code&gt; 新建页面时创建的页面由 &lt;code&gt;archetypes/default.md&lt;/code&gt;决定&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;说明&#34;&gt;说明&lt;/h2&gt;
+&lt;p&gt;永久链接的生成方案是比较简单的，直接对时间 + 文章名生成字符串做一下 md5 然后取任意 4-12 位即可。这样做的话 md5 冲撞概率极小，同时也没有那么大的运算负担。而 Hugo 在永久链接中支持下面这个参数：slug。简单来说，我们可以针对每一篇文章指定一个 slug，然后在 config.toml 中配置 permalinks 包含 slug 参数，就可以生成唯一的永久链接。我们的目的就是对每篇文章自动生成一个 slug。&lt;/p&gt;
+&lt;h2 id=&#34;操作&#34;&gt;操作&lt;/h2&gt;
+&lt;p&gt;修改 &lt;code&gt;archetypes/default.md&lt;/code&gt; 添加如下一行：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nn&#34;&gt;---&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;c&#34;&gt;#...&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;slug&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;{{&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;substr (md5 (printf &amp;#34;%s%s&amp;#34; .Date (replace .TranslationBaseName &amp;#34;-&amp;#34; &amp;#34; &amp;#34; | title))) 4 8 }}&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;c&#34;&gt;#...&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nn&#34;&gt;---&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;blockquote&gt;
+&lt;p&gt;参考：&lt;a class=&#34;link&#34; href=&#34;https://blog.lxdlam.com/post/9cc3283b/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Hugo 永久链接&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

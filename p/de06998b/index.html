@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='Spring实战-第3章——读书笔记'><title>高级装配</title>
+
+<link rel='canonical' href='https://io-oss.gitee.io/blog/p/de06998b/'>
+
+<link rel="stylesheet" href="/blog/scss/style.min.12198daa8d4d37fb14c357d5882bac3ef0b8e3550bb6d6f149da2f5c20bad7f7.css"><meta property='og:title' content='高级装配'>
+<meta property='og:description' content='Spring实战-第3章——读书笔记'>
+<meta property='og:url' content='https://io-oss.gitee.io/blog/p/de06998b/'>
+<meta property='og:site_name' content='海拉鲁大魔王'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Spring' /><meta property='article:published_time' content='2021-06-03T17:13:10&#43;08:00'/><meta property='article:modified_time' content='2021-06-08T17:25:10&#43;08:00'/>
+<meta name="twitter:title" content="高级装配">
+<meta name="twitter:description" content="Spring实战-第3章——读书笔记">
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="">
+                
+                    <img src="https://cdn.jsdelivr.net/gh/io-oss/NetDisk/img/202110121513059.gif" width="300" height="300" class="site-logo" loading="lazy" alt="Avatar">
+                
+                </a>
+                
+                    <span class="emoji">🇨🇳</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="https://io-oss.gitee.io/blog">海拉鲁大魔王</a></h1>
+            <h2 class="site-description">保持热爱，奔赴山海。</h2>
+        </div>
+    </header><ol class="social-menu">
+            
+                <li>
+                    <a 
+                        href='https://www.cnblogs.com/io-oss/'
+                        target="_blank"
+                        title="cnblogs"
+                    >
+                        
+                        
+                            <svg t="1647595532327" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2979" width="200" height="200"><path d="M851.404 172.596c-187.462-187.461-491.346-187.461-678.808 0-187.461 187.462-187.461 491.346 0 678.808 187.462 187.461 491.346 187.461 678.808 0 187.461-187.462 187.461-491.346 0-678.808zM387.33 728.087a47.084 47.084 0 1 1-66.633-66.502 47.084 47.084 0 0 1 66.633 66.502z m205.527 1.397a38.75 38.75 0 0 1-76.625-11.52h-0.044a6.545 6.545 0 0 0-0.044 0.305v-0.349c0.306-2.618 2.051-20.727-2.967-44.99a174.24 174.24 0 0 0-48.567-89.28 172.102 172.102 0 0 0-88.8-48.305 156.698 156.698 0 0 0-42.458-2.923 38.662 38.662 0 0 1-35.39-65.324 38.618 38.618 0 0 1 21.12-10.822v-0.218c4.452-0.742 111.142-16.45 200.335 72.742 89.018 89.018 74.182 196.145 73.44 200.727z m175.2 7.592a38.75 38.75 0 0 1-65.673 21.382 39.49 39.49 0 0 1-11.65-33.73c0.087-0.35 5.105-37.484-5.062-88.975-13.31-67.375-45.295-126.895-94.953-176.902-50.007-49.702-109.527-81.644-176.945-94.953-51.491-10.167-88.582-5.193-89.019-5.149h0.219-0.044a39.927 39.927 0 0 1-44.684-32.902 38.836 38.836 0 0 1 32.204-44.378c1.92-0.305 47.869-7.33 111.273 4.364a411.753 411.753 0 0 1 106.254 34.952 425.76 425.76 0 0 1 114.633 82.255l0.916 0.96 0.96 0.873a425.89 425.89 0 0 1 82.255 114.72c16.407 33.6 28.145 69.294 34.996 106.21 11.651 63.404 4.67 109.353 4.32 111.273z" fill="#1296DB" p-id="2980"></path></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://gitee.com/io-oss'
+                        target="_blank"
+                        title="gitee"
+                    >
+                        
+                        
+                            <svg t="1647595124218" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1242" width="200" height="200"><path d="M512 1024C229.222 1024 0 794.778 0 512S229.222 0 512 0s512 229.222 512 512-229.222 512-512 512z m259.149-568.883h-290.74a25.293 25.293 0 0 0-25.292 25.293l-0.026 63.206c0 13.952 11.315 25.293 25.267 25.293h177.024c13.978 0 25.293 11.315 25.293 25.267v12.646a75.853 75.853 0 0 1-75.853 75.853h-240.23a25.293 25.293 0 0 1-25.267-25.293V417.203a75.853 75.853 0 0 1 75.827-75.853h353.946a25.293 25.293 0 0 0 25.267-25.292l0.077-63.207a25.293 25.293 0 0 0-25.268-25.293H417.152a189.62 189.62 0 0 0-189.62 189.645V771.15c0 13.977 11.316 25.293 25.294 25.293h372.94a170.65 170.65 0 0 0 170.65-170.65V480.384a25.293 25.293 0 0 0-25.293-25.267z" fill="#C71D23" p-id="1243"></path></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://github.com/io-oss'
+                        target="_blank"
+                        title="GitHub"
+                    >
+                        
+                        
+                            <svg t="1647604886347" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4338" width="200" height="200"><path d="M512 512m-512 0a512 512 0 1 0 1024 0 512 512 0 1 0-1024 0Z" fill="#4186F5" p-id="4339"></path><path d="M611.944 302.056c0-15.701 2.75-30.802 7.816-44.917a384.238 384.238 0 0 0-186.11 2.956c-74.501-50.063-93.407-71.902-107.975-39.618a136.243 136.243 0 0 0-3.961 102.287 149.515 149.515 0 0 0-39.949 104.806c0 148.743 92.139 181.875 179.961 191.61a83.898 83.898 0 0 0-25.192 51.863c-40.708 22.518-91.94 8.261-115.181-32.058a83.117 83.117 0 0 0-60.466-39.98s-38.871-0.361-2.879 23.408a102.97 102.97 0 0 1 43.912 56.906s23.398 75.279 133.531 51.863v65.913c0 10.443 13.548 42.63 102.328 42.63 71.275 0 94.913-30.385 94.913-42.987V690.485a90.052 90.052 0 0 0-26.996-72.03c83.996-9.381 173.328-40.204 179.6-176.098a164.706 164.706 0 0 1-21.129 1.365c-84.07 0-152.223-63.426-152.223-141.666z" fill="#FFFFFF" p-id="4340"></path><path d="M743.554 322.765a136.267 136.267 0 0 0-3.961-102.289s-32.396-10.445-107.979 39.618a385.536 385.536 0 0 0-11.853-2.956 132.623 132.623 0 0 0-7.816 44.917c0 78.24 68.152 141.667 152.222 141.667 7.171 0 14.222-0.472 21.129-1.365 0.231-5.03 0.363-10.187 0.363-15.509a149.534 149.534 0 0 0-42.105-104.083z" fill="#FFFFFF" opacity=".4" p-id="4341"></path></svg>
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+
+        <li >
+            <a href='/blog/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/blog/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/blog/p/9c0b7f1d/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-tools" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M3 21h4l13 -13a1.5 1.5 0 0 0 -4 -4l-13 13v4" />
+  <line x1="14.5" y1="5.5" x2="18.5" y2="9.5" />
+  <polyline points="12 8 7 3 3 7 8 12" />
+  <line x1="7" y1="8" x2="5.5" y2="9.5" />
+  <polyline points="16 12 21 17 17 21 12 16" />
+  <line x1="16" y1="17" x2="14.5" y2="18.5" />
+</svg>
+                
+                <span>工具</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/blog/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/blog/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>会友</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/blog/p/3c32f507/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-messages" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M21 14l-3 -3h-7a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1h9a1 1 0 0 1 1 1v10" />
+  <path d="M14 15v2a1 1 0 0 1 -1 1h-7l-3 3v-10a1 1 0 0 1 1 -1h2" />
+</svg>
+
+
+
+                
+                <span>留言</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/blog/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+            
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <span>暗色模式</span>
+                </li>
+            
+        </div>
+    </ol>
+</aside>
+<main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/blog/categories/%E8%AF%BB%E4%B9%A6/" >
+                读书
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/blog/p/de06998b/">高级装配</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            Spring实战-第3章——读书笔记
+        </h3>
+        
+    </div>
+
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2021年 6月3日</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 6 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+</header>
+
+    <section class="article-content">
+    
+    
+    <blockquote>
+<ul>
+<li>Spring profile</li>
+<li>条件化的bean声明</li>
+<li>自动装配与歧义性</li>
+<li>bean的作用域</li>
+<li>Spring表达式语言</li>
+</ul>
+</blockquote>
+<h2 id="环境与profile">环境与profile</h2>
+<p>软件运行在不同的环境，需要装配不同的bean。比如：在开发环境、QA环境和生产环境可能会用到不同类型的数据库配置。</p>
+<p>常规的处理手段是构建针对性的独立配置类（或者XML），在构建阶段确定要将哪一个配置编译到应用中。这种方式需要为每种环境重新构建应用，这将导致各种问题，比如从QA阶段迁移到生产环境时，重新构建可能会引入BUG。</p>
+<p>Spring提供了不需要重新构建的解决方案。首先，在Java配置中，通过**@Profile**注解来指定某个bean属于哪一个Profile（或者在XML配置中通过&lt;beans&gt;元素的profile属性置顶）；然后，用spring.profiles.active和spring.profiles.default 来指定激活的profile和默认的profile（激活和默认的profile可以同时指定多个）。</p>
+<blockquote>
+<p>指定了profile的bean只有在对应的profile被激活时才会被创建。没有指定profie的bean始终都会被创建。</p>
+</blockquote>
+<p>设置active和default属性的方式</p>
+<ul>
+<li>作为DispatcherServlet的初始化参数；</li>
+<li>作为Web应用的上下文参数；</li>
+<li>作为JNDI条目；</li>
+<li>作为环境变量；</li>
+<li>作为JVM的系统属性；</li>
+<li>在集成测试类上，使用@ActiveProfiles注解设置。</li>
+</ul>
+<h2 id="条件化的bean">条件化的bean</h2>
+<p>有些时候，对于某些bean，我们希望只有在某些特定的情况满足之后在创建这个bean。Spring提供了**@Conditional**注解来实现根据条件动态配置bean的功能。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Bean</span>
+</span></span><span class="line"><span class="cl"><span class="nd">@Conditional</span><span class="o">(</span><span class="n">MagicExistsCondition</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="n">MagicBean</span> <span class="nf">magicBean</span><span class="o">(){</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="k">new</span> <span class="n">MagicBean</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nn">com.habuma.restfun</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">org.springframework.context.annotation.Condition</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">org.springframework.context.annotation.ConditionContext</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">org.springframework.core.env.Environment</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">org.springframework.core.type.AnnotatedTypeMetadata</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MagicExistsCondition</span> <span class="kd">implements</span> <span class="n">Condition</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="nd">@Override</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">matches</span><span class="o">(</span><span class="n">ConditionContext</span> <span class="n">context</span><span class="o">,</span> <span class="n">AnnotatedTypeMetadata</span> <span class="n">metadata</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Environment</span> <span class="n">env</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="na">getEnvironment</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">env</span><span class="o">.</span><span class="na">containsProperty</span><span class="o">(</span><span class="s">&#34;magic&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">  <span class="o">}</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>当matches()方法返回true时bean才会被创建。</p>
+<h2 id="处理自动装配的歧义">处理自动装配的歧义</h2>
+<ol>
+<li>
+<p>通过**@Primary**注解，设置首选bean（XML中对应的是&lt;bean&gt;元素的bool型属性primary）</p>
+</li>
+<li>
+<p>通过**@Qualifier**注解，指定注入时要选中的bean</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Autowired</span>
+</span></span><span class="line"><span class="cl"><span class="nd">@Qualifier</span><span class="o">(</span><span class="s">&#34;iceCream&#34;</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kt">void</span> <span class="nf">setDessert</span><span class="o">(</span><span class="n">Dessert</span> <span class="n">dessert</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="o">.</span><span class="na">dessert</span> <span class="o">=</span> <span class="n">dessert</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p><strong>@Qualifier</strong>注解所设置的参数就是要注入bean的ID</p>
+</blockquote>
+</li>
+</ol>
+<h3 id="使用自定义限定符">使用自定义限定符</h3>
+<p>bean的ID和默认的限定符会因类名的修改而发生变化，从而导致自动装配失败，可以在bean声明上添加**@Qualifier**注解来设置自定义的限定符。</p>
+<h3 id="使用自定义限定符注解">使用自定义限定符注解</h3>
+<blockquote>
+<p>使用自定义的限定符，还是会遇到指向多个可选bean的情况，这个时候需要增加多个限定符来进一步缩小范围，但是Java不允许同一个条目上出现相同类型的多个注解。针对这种情况，Spring提供了自定义限定符注解的能力。</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Target</span><span class="o">({</span><span class="n">ElementType</span><span class="o">.</span><span class="na">CONSTRUCTOR</span><span class="o">,</span> <span class="n">ElementType</span><span class="o">.</span><span class="na">FIELD</span><span class="o">,</span>
+</span></span><span class="line"><span class="cl">         <span class="n">ElementType</span><span class="o">.</span><span class="na">METHOD</span><span class="o">,</span> <span class="n">ElementType</span><span class="o">.</span><span class="na">TYPE</span><span class="o">})</span>
+</span></span><span class="line"><span class="cl"><span class="nd">@Retention</span><span class="o">(</span><span class="n">RetentionPolicy</span><span class="o">.</span><span class="na">RUNTIME</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="nd">@Qualifier</span>
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="nd">@interface</span> <span class="n">Cold</span> <span class="o">{</span> <span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>在使用时不再用**@Qualifier(&ldquo;cold&rdquo;)**，而是使用自定义的@Cold注解,这样就就可以在同一个条目上增加多个自定义注解，将可选范围缩小到只有一个bean满足需求。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Autowired</span>
+</span></span><span class="line"><span class="cl"><span class="nd">@Cold</span>
+</span></span><span class="line"><span class="cl"><span class="nd">@Creamy</span>
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kt">void</span> <span class="nf">setDessert</span><span class="o">(</span><span class="n">Dessert</span> <span class="n">dessert</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="o">.</span><span class="na">dessert</span> <span class="o">=</span> <span class="n">dessert</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="bean的作用域">bean的作用域</h2>
+<p>默认情况下，Spring应用上下文中的bean都是以单例形式创建的——不论给定的bean被注入到其它的bean多少次，每次注入的都是同一个实例。</p>
+<p>一般情况下，单例模式就能满足需求。但是仍有单例模式不适用的场景。</p>
+<p>Spring定义的作用域：</p>
+<ul>
+<li>单例（Singleton）：整个应用只创建bean的一个实例。</li>
+<li>原型（Prototype）：每次注入或者通过Spring应用上下文获取都会创建一个新的bean实例。</li>
+<li>会话（Session）：在Web应用中，为每个会话创建一个bean实例。</li>
+<li>请求（Request）：在Web应用中，为每个请求创建一个bean实例。</li>
+</ul>
+<p>设定作用域要使用**@Scope**注解。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Component</span>
+</span></span><span class="line"><span class="cl"><span class="nd">@Scope</span><span class="o">(</span><span class="n">ConfigurableBeanFactory</span><span class="o">.</span><span class="na">SCOPE_PROTOTYPE</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Notepad</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>对应的XML配置</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&#34;notepad&#34;</span>
+</span></span><span class="line"><span class="cl">      <span class="na">class=</span><span class="s">&#34;com.myapp.Notepad&#34;</span>
+</span></span><span class="line"><span class="cl">      <span class="na">scope=</span><span class="s">&#34;prototype&#34;</span> <span class="nt">/&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="会话和请求作用域">会话和请求作用域</h3>
+<p>会话作用域例子-购物车</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Component</span>
+</span></span><span class="line"><span class="cl"><span class="nd">@Scope</span><span class="o">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">value</span><span class="o">=</span><span class="n">WebApplicationContext</span><span class="o">.</span><span class="na">SCOPE_SESSION</span><span class="o">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">proxyMode</span><span class="o">=</span><span class="n">ScopedProxyMode</span><span class="o">.</span><span class="na">INTERFACES</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="n">ShoppingCart</span> <span class="nf">cart</span><span class="o">()</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>value设置成了WebApplicationContext中的SCOPE_SESSION常量（它的值是session），表示Spring需要为Web应用中的每一个会话创建一个ShopeingCart。</p>
+<p>proxyMode设置成ScopedProxyMode.INTERFACES。用于解决将会话货请求作用域的bean注册到单例bean中遇到的问题。</p>
+<p>假设存在一个单例的StoreService bean：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Component</span>
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">StoreService</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="nd">@Autowired</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setShoppingCart</span><span class="o">(</span><span class="n">ShoppingCart</span> <span class="n">shoppingCart</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="o">.</span><span class="na">shoppingCart</span> <span class="o">=</span> <span class="n">shoppingCart</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">  <span class="o">}</span>
+</span></span><span class="line"><span class="cl">  <span class="o">...</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>StoreService作为一个单例bean，会在应用上下文加载时创建，当它创建时又会试图将ShoppingCart bean注入到setShoppingCart()方法。而ShoppingCart bean又是会话作用域，需要有用户进入系统，创建了会话之后才会出现其实例。proxyMode设置为ScopedProxyMode.INTERFACES之后，Spring会注入一个到ShoppingCart的代理，这个代理暴露的方法与ShoppingCart相同，当StoreService调用ShoppingCart方法是，代理会对其进行懒解析并将调用委托给会话作用域内真正的ShoppingCart bean。</p>
+<blockquote>
+<p>proxyMode设置成ScopedProxyMode.INTERFACES时，要求ShoppingCart时接口，而不是类。如果是一个具体的类，需要将proxyMode属性设置为ScopedProxyMode.TARGET_CLASS。</p>
+</blockquote>
+<h2 id="运行时值注入">运行时值注入</h2>
+<ul>
+<li>属性占位符（Property placeholder）</li>
+<li>Spring表达式语言</li>
+</ul>
+<h3 id="注入外部值">注入外部值</h3>
+<ol>
+<li>使用**@PropertySource**注解和Environment：</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nn">com.soundsystem</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">org.springframework.context.annotation.Bean</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">org.springframework.context.annotation.Configuration</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">org.springframework.context.annotation.PropertySource</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">org.springframework.core.env.Environment</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nd">@Configuration</span>
+</span></span><span class="line"><span class="cl"><span class="nd">@PropertySource</span><span class="o">(</span><span class="s">&#34;classpath:/com/soundsystem/app.properties&#34;</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">EnvironmentConfig</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="nd">@Autowired</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Environment</span> <span class="n">env</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  <span class="nd">@Bean</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">public</span> <span class="n">BlankDisc</span> <span class="nf">blankDisc</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="k">new</span> <span class="n">BlankDisc</span><span class="o">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">env</span><span class="o">.</span><span class="na">getProperty</span><span class="o">(</span><span class="s">&#34;disc.title&#34;</span><span class="o">),</span>
+</span></span><span class="line"><span class="cl">        <span class="n">env</span><span class="o">.</span><span class="na">getProperty</span><span class="o">(</span><span class="s">&#34;disc.artist&#34;</span><span class="o">));</span>
+</span></span><span class="line"><span class="cl">  <span class="o">}</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>@PropertySource</strong>注解引用路径对应的属性文件会加载到Spring的Environment中。</p>
+<ol start="2">
+<li>Environment中getProperty()方法的重载：</li>
+</ol>
+<ul>
+<li>String  getProperty(String key)</li>
+<li>String  getProperty(String key,String defaultValue)</li>
+<li>T getProperty(String key,Class<T> type)</li>
+<li>T getProperty(String key,Class<T> type,T defaultValue)</li>
+</ul>
+<ol start="3">
+<li>
+<p>占位符</p>
+<p>XML中的属性占位符：</p>
+</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&#34;sgtPeppers&#34;</span>
+</span></span><span class="line"><span class="cl">      <span class="na">class=</span><span class="s">&#34;soundsystem.BlankDisc&#34;</span>
+</span></span><span class="line"><span class="cl">      <span class="na">c:_title=</span><span class="s">&#34;${disc.title}&#34;</span>
+</span></span><span class="line"><span class="cl">      <span class="na">c:_artist=</span><span class="s">&#34;${disc.artist}&#34;</span> <span class="nt">/&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="spring表达式语言">Spring表达式语言</h3>
+<blockquote>
+<p>SpEL（Spring Expression Language，SpEL）表达式要放到“#{ ··· }”之内，格式上与属性占位符类似。</p>
+</blockquote>
+<ul>
+<li>
+<p>使用bean的ID来引用bean</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="err">#</span><span class="o">{</span><span class="n">sgtPeppers</span><span class="o">.</span><span class="na">artist</span><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>调用方法和访问对象的属性</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="err">#</span><span class="o">{</span><span class="n">T</span><span class="o">(</span><span class="n">System</span><span class="o">).</span><span class="na">currentTimeMillis</span><span class="o">()}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>对值进行算术、关系和逻辑运算</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="err">#</span><span class="o">{</span><span class="n">2</span> <span class="o">*</span> <span class="n">T</span><span class="o">(</span><span class="n">java</span><span class="o">.</span><span class="na">lang</span><span class="o">.</span><span class="na">Math</span><span class="o">).</span><span class="na">PI</span> <span class="o">*</span> <span class="n">circle</span><span class="o">.</span><span class="na">radius</span><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>正则表达式匹配</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="err">#</span><span class="o">{</span><span class="n">admin</span><span class="o">.</span><span class="na">email</span> <span class="n">matches</span> <span class="err">&#39;</span><span class="o">[</span><span class="n">a</span><span class="o">-</span><span class="n">zA</span><span class="o">-</span><span class="n">Z0</span><span class="o">-</span><span class="n">9</span><span class="o">.</span><span class="na">_</span><span class="o">%+-]+</span><span class="err">@</span><span class="o">[</span><span class="n">a</span><span class="o">-</span><span class="n">zA</span><span class="o">-</span><span class="n">Z0</span><span class="o">-</span><span class="n">9</span><span class="o">.-]+</span><span class="err">\\</span><span class="o">.</span><span class="na">com</span><span class="err">&#39;</span><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>集合操作</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="err">#</span><span class="o">{</span><span class="n">jukebox</span><span class="o">.</span><span class="na">songs</span><span class="o">[</span><span class="n">4</span><span class="o">].</span><span class="na">title</span><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/blog/tags/spring/">Spring</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    <section class="article-lastmod">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+        <span>
+            最后更新于 2021年 6月8日 17:25
+        </span>
+    </section></footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-contents--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-contents">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/blog/p/a6324888/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">装配Bean</h2>
+        </div>
+    </a>
+</article>
+            
+                
+<article class="">
+    <a href="/blog/p/006e1380/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">初步了解Spring</h2>
+        </div>
+    </a>
+</article>
+            
+                
+<article class="">
+    <a href="/blog/p/6de70ddc/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">正则表达式常用规则</h2>
+        </div>
+    </a>
+</article>
+            
+                
+<article class="">
+    <a href="/blog/p/a0fa4610/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Pro Git</h2>
+        </div>
+    </a>
+</article>
+            
+                
+<article class="">
+    <a href="/blog/p/a8e95393/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Java核心技术·卷I</h2>
+        </div>
+    </a>
+</article>
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <script
+    src="https://giscus.app/client.js"
+    data-repo="io-oss/comments"
+    data-repo-id="R_kgDOGfC4_w"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOGfC4_84COKZN"
+    data-mapping="title"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light_protanopia"
+    data-input-position="top"
+    data-lang="zh-CN"
+    crossorigin="anonymous"
+    async
+></script>
+<script>
+    function setGiscusTheme(theme) {
+        let giscus = document.querySelector("iframe.giscus-frame");
+        if (giscus) {
+            giscus.contentWindow.postMessage(
+                {
+                    giscus: {
+                        setConfig: {
+                            theme: theme,
+                        },
+                    },
+                },
+                "https://giscus.app"
+            );
+        }
+    }
+
+    (function () {
+        addEventListener("message", (e) => {
+            if (event.origin !== "https://giscus.app") return;
+            handler();
+        });
+        window.addEventListener("onColorSchemeChange", handler);
+
+        function handler() {
+            if (document.documentElement.dataset.scheme === "light") {
+                setGiscusTheme('light_protanopia');
+            } else {
+                setGiscusTheme('dark_protanopia');
+            }
+        }
+    })();
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2018 - 
+        
+        2022 海拉鲁大魔王
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.11.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css"integrity="sha256-c0uckgykQ9v5k&#43;IqViZOZKc47Jn7KQil4/MP3ySA3F8="crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css"integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE="crossorigin="anonymous"
+            >
+
+            </main>
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#环境与profile">环境与profile</a></li>
+    <li><a href="#条件化的bean">条件化的bean</a></li>
+    <li><a href="#处理自动装配的歧义">处理自动装配的歧义</a>
+      <ol>
+        <li><a href="#使用自定义限定符">使用自定义限定符</a></li>
+        <li><a href="#使用自定义限定符注解">使用自定义限定符注解</a></li>
+      </ol>
+    </li>
+    <li><a href="#bean的作用域">bean的作用域</a>
+      <ol>
+        <li><a href="#会话和请求作用域">会话和请求作用域</a></li>
+      </ol>
+    </li>
+    <li><a href="#运行时值注入">运行时值注入</a>
+      <ol>
+        <li><a href="#注入外部值">注入外部值</a></li>
+        <li><a href="#spring表达式语言">Spring表达式语言</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/blog/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

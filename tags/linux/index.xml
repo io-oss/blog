@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Linux on 海拉鲁大魔王</title>
+        <link>https://io-oss.gitee.io/blog/tags/linux/</link>
+        <description>Recent content in Linux on 海拉鲁大魔王</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <lastBuildDate>Thu, 02 Sep 2021 09:29:34 +0800</lastBuildDate><atom:link href="https://io-oss.gitee.io/blog/tags/linux/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Linux Top 命令解析</title>
+        <link>https://io-oss.gitee.io/blog/p/1372114a/</link>
+        <pubDate>Thu, 02 Sep 2021 09:29:34 +0800</pubDate>
+        
+        <guid>https://io-oss.gitee.io/blog/p/1372114a/</guid>
+        <description>&lt;h2 id=&#34;命令&#34;&gt;命令&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;top
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;效果&#34;&gt;效果&lt;/h2&gt;
+&lt;p&gt;top命令经常用来监控系统状况，通过这个命令可以查看cpu、内存等关键信息的使用情况。运行效果如图示：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://io-oss.gitee.io/blog/blog/p/1372114a/image-20210902093829574.png&#34;
+	width=&#34;1162&#34;
+	height=&#34;1274&#34;
+	srcset=&#34;https://io-oss.gitee.io/blog/blog/p/1372114a/image-20210902093829574_hu4a21a38fa34c309849e8a7b2ca16554c_286186_480x0_resize_box_3.png 480w, https://io-oss.gitee.io/blog/blog/p/1372114a/image-20210902093829574_hu4a21a38fa34c309849e8a7b2ca16554c_286186_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20210902093829574&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;91&#34;
+		data-flex-basis=&#34;218px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;说明&#34;&gt;说明&lt;/h2&gt;
+&lt;p&gt;第一行中：&lt;code&gt;09:26:59&lt;/code&gt;是当前的系统时间，&lt;code&gt;44 days，18:21&lt;/code&gt;表示已运行了44天18小时21分钟。&lt;code&gt;2 users&lt;/code&gt;表示当前有两个用户登录系统。&lt;code&gt;load average: 28.60, 22.79, 22.15&lt;/code&gt;三个数值表示1分钟、5分钟、15分钟内的CPU负载情况。理想状态下，CPU满负荷工作、并且没有等待进程，此时&lt;code&gt;平均负载=1*逻辑核心数&lt;/code&gt;；但是在实际生产系统中，不建议系统满负荷运行，一般的经验是要小于&lt;code&gt;平均负载=0.7*逻辑核心数&lt;/code&gt;这个标准，如果平均负载持续大于这个标准，就需要开始调查原因，防止系统恶化；如果持续大于&lt;code&gt;平均负载=1*逻辑核心数&lt;/code&gt;，就必须要找解决方法，降低平均负载；如果负载数持续大于&lt;code&gt;平均负载=5*逻辑核心数&lt;/code&gt;的标准，表明系统已出现严重问题，长时间未响应，或者接近死机。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;关于CPU负载，除了要关注CPU负载的绝对值，还要关注CPU负载的变化趋势。如果CPU负载的三个值很接近，表明短期内系统负载稳定，这时需要关注与昨日或者上周负载情况的对比。如果1分钟内的负载远低于过去5分钟或15分钟内的负载，可以理解为系统负载情况正在转好。如果1分钟内的负载远大于过去5分钟或15分钟的负载值，说明系统状况正在趋于恶化，此时就需要关注是否是临时性的抖动，若不是，就需要积极调查原因降低负载。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;第二行中显示的是系统进程信息，表示当前总进程数（total）313个、进行中的进程数（running）1个、休眠中（sleeping）的312个、已终止（stopped）0个、僵尸状态（zombie）的0个。&lt;/p&gt;
+&lt;p&gt;第三行中的是CPU使用率，96.1 us-用户空间CPU占比、3.5 sy-内核空间CPU占比、0.0 ni-改变过优先级的进程CPU占比、0.0 id-空闲CPU占比、0.0 wa-IO等待CPU占比、0.0 hi-硬件中断CPU占比、0.4 si-软中断CPU占比、0.0 st-和虚拟机有关，数值越大表示CPU被宿主机或者其它虚拟机占用的时间越长。&lt;/p&gt;
+&lt;p&gt;第四行是内存状态信息，total是物理内存总量，free是空闲内存总量，used是使用中的内存总量。buff/cache是缓冲区占用内存总量，系统实际可用内存可以理解为free+buff/cache。第五行是swap交换分区的信息，total是交换区总量，free是空闲交换区总量，used是使用的量。如果交换区的used数据一直在变化，那就说明系统内存真的不够用了。&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

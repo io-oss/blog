@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>虚拟机 on 海拉鲁大魔王</title>
+        <link>https://io-oss.gitee.io/blog/tags/%E8%99%9A%E6%8B%9F%E6%9C%BA/</link>
+        <description>Recent content in 虚拟机 on 海拉鲁大魔王</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <lastBuildDate>Wed, 19 Jan 2022 10:56:59 +0800</lastBuildDate><atom:link href="https://io-oss.gitee.io/blog/tags/%E8%99%9A%E6%8B%9F%E6%9C%BA/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>VirtualBox使用记录</title>
+        <link>https://io-oss.gitee.io/blog/p/c9c1eb08/</link>
+        <pubDate>Wed, 19 Jan 2022 10:56:59 +0800</pubDate>
+        
+        <guid>https://io-oss.gitee.io/blog/p/c9c1eb08/</guid>
+        <description>&lt;h2 id=&#34;问题记录&#34;&gt;问题记录&lt;/h2&gt;
+&lt;h3 id=&#34;macos中virtualbox升级之后虚拟机无法启动&#34;&gt;MacOS中VirtualBox升级之后虚拟机无法启动&lt;/h3&gt;
+&lt;p&gt;检查&lt;code&gt;系统偏好设置&lt;/code&gt;-&amp;gt;&lt;code&gt;安全性与隐私&lt;/code&gt;-&amp;gt;&lt;code&gt;通用&lt;/code&gt;下有没有需要允许的高风险操作，升级时可能会安装一些服务组件，如果在还没有批准时虚拟机可能无法正常运行&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Automator on 海拉鲁大魔王</title>
+        <link>https://io-oss.gitee.io/blog/tags/automator/</link>
+        <description>Recent content in Automator on 海拉鲁大魔王</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <lastBuildDate>Fri, 28 May 2021 13:31:34 +0800</lastBuildDate><atom:link href="https://io-oss.gitee.io/blog/tags/automator/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>自动操作（Automator）</title>
+        <link>https://io-oss.gitee.io/blog/p/375e7a13/</link>
+        <pubDate>Fri, 28 May 2021 13:31:34 +0800</pubDate>
+        
+        <guid>https://io-oss.gitee.io/blog/p/375e7a13/</guid>
+        <description>&lt;img src="https://cdn.jsdelivr.net/gh/io-oss/NetDisk/img/20210528111008.webp" alt="Featured image of post 自动操作（Automator）" /&gt;&lt;blockquote&gt;
+&lt;p&gt;自动操作是系统自带软件，可以将一些重复性的工作自动化。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;功能使用&#34;&gt;功能使用&lt;/h2&gt;
+&lt;h3 id=&#34;shell脚本接收参数&#34;&gt;Shell脚本接收参数&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;自变量获取参数&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://io-oss.gitee.io/blog/blog/p/375e7a13/image-20210529140411891.png&#34;
+	width=&#34;2586&#34;
+	height=&#34;738&#34;
+	srcset=&#34;https://io-oss.gitee.io/blog/blog/p/375e7a13/image-20210529140411891_huaa86f5c88be918244d88a7d416da6983_303900_480x0_resize_box_3.png 480w, https://io-oss.gitee.io/blog/blog/p/375e7a13/image-20210529140411891_huaa86f5c88be918244d88a7d416da6983_303900_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;自变量获取参数&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;350&#34;
+		data-flex-basis=&#34;840px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;stdin获取参数
+&lt;img src=&#34;https://io-oss.gitee.io/blog/blog/p/375e7a13/image-20210529132528728.png&#34;
+	width=&#34;2586&#34;
+	height=&#34;740&#34;
+	srcset=&#34;https://io-oss.gitee.io/blog/blog/p/375e7a13/image-20210529132528728_hud4e303a31bbc2386eddab3ba9428998f_290227_480x0_resize_box_3.png 480w, https://io-oss.gitee.io/blog/blog/p/375e7a13/image-20210529132528728_hud4e303a31bbc2386eddab3ba9428998f_290227_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;stdin获取参数&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;349&#34;
+		data-flex-basis=&#34;838px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;故障排除&#34;&gt;故障排除&lt;/h2&gt;
+&lt;h3 id=&#34;shell脚本部分命令不识别&#34;&gt;Shell脚本部分命令不识别&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&#34;https://io-oss.gitee.io/blog/blog/p/375e7a13/image-20210529140016823.png&#34;
+	width=&#34;578&#34;
+	height=&#34;80&#34;
+	srcset=&#34;https://io-oss.gitee.io/blog/blog/p/375e7a13/image-20210529140016823_hueeb6cc8e5efd06468d801e2602ee2f9d_29523_480x0_resize_box_3.png 480w, https://io-oss.gitee.io/blog/blog/p/375e7a13/image-20210529140016823_hueeb6cc8e5efd06468d801e2602ee2f9d_29523_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;**: command not found&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;722&#34;
+		data-flex-basis=&#34;1734px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;查看选择的Shell类型是否合适。&lt;/li&gt;
+&lt;li&gt;在脚本前面加入&lt;code&gt;source ~/.bash_profile&lt;/code&gt;,引入环境变量配置。&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>
